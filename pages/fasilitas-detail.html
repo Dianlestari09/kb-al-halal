@@ -127,6 +127,12 @@
             align-items: start;
         }
 
+        .detail-image-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .detail-image {
             border-radius: 15px;
             overflow: hidden;
@@ -140,6 +146,42 @@
             height: auto;
             display: block;
             border-radius: 15px;
+        }
+
+        .detail-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gallery-item-detail {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(132, 94, 194, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 5px solid var(--secondary-color);
+            background: white;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .gallery-item-detail img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .gallery-caption {
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(168, 216, 216, 0.9) 0%, rgba(212, 168, 116, 0.9) 100%);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
         }
 
         #detailText {
@@ -426,16 +468,13 @@
             <div id="detailText">
                 <!-- Akan diisi oleh JavaScript -->
             </div>
-            <div class="detail-image">
-                <img id="detailImage" src="" alt="Fasilitas">
-            </div>
-        </div>
-
-        <!-- Gallery Section -->
-        <div class="gallery-section" id="gallerySection" style="display: none;">
-            <h2>Galeri Fasilitas</h2>
-            <div id="galleryContainer" class="gallery-grid">
-                <!-- Gallery items akan diisi oleh JavaScript -->
+            <div class="detail-image-wrapper">
+                <div class="detail-image">
+                    <img id="detailImage" src="" alt="Fasilitas">
+                </div>
+                <div id="galleryContainer" class="detail-gallery">
+                    <!-- Gallery items akan diisi oleh JavaScript -->
+                </div>
             </div>
         </div>
 
@@ -519,8 +558,8 @@
                 subtitle: 'Permainan yang Mengembangkan Kreativitas dan Kognitif',
                 image: '../assets/images/bermain.jpeg',
                 gallery: [
-                    { image: '../assets/images/loker.jpeg', caption: 'Lemari Penyimpanan APE' },
-                    { image: '../assets/images/bermain2.jpeg', caption: 'Anak-Anak Bermain APE' }
+                    { image: '../assets/images/loker.jpeg' },
+                    { image: '../assets/images/bermain2.jpeg' }
                 ],
                 description: `
                     <p>Koleksi lengkap Alat Permainan Edukatif (APE) indoor kami dirancang untuk mengembangkan berbagai aspek perkembangan anak melalui bermain yang menyenangkan dan interaktif.</p>
@@ -664,21 +703,18 @@
 
                 // Load gallery if exists
                 if (data.gallery && data.gallery.length > 0) {
-                    const gallerySection = document.getElementById('gallerySection');
                     const galleryContainer = document.getElementById('galleryContainer');
                     galleryContainer.innerHTML = '';
 
                     data.gallery.forEach(item => {
                         const galleryItem = document.createElement('div');
-                        galleryItem.className = 'gallery-item';
+                        galleryItem.className = 'gallery-item-detail';
                         galleryItem.innerHTML = `
-                            <img src="${item.image}" alt="${item.caption}">
-                            <div class="gallery-caption">${item.caption}</div>
+                            <img src="${item.image}" alt="${item.caption || ''}">
+                            ${item.caption ? `<div class="gallery-caption">${item.caption}</div>` : ''}
                         `;
                         galleryContainer.appendChild(galleryItem);
                     });
-
-                    gallerySection.style.display = 'block';
                 }
             }
         }
