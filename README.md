@@ -255,3 +255,6 @@ Website ini dibuat untuk kepentingan umum. Silakan gunakan dan modifikasi sesuai
 **Terakhir diupdate**: Desember 2025
 
 Semoga website ini bermanfaat untuk kemajuan masjid dan komunitas desa! 🤲
+=======
+# kb-al-halal
+>>>>>>> 20b111e2bfb5b4732a4e9711ac302a03f35f6905
