@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detail Fasilitas KB Halal">
+    <title>Detail Fasilitas KB Halal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #F5F8FB 0%, #FFFBF8 100%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(90deg, #6B9FB8 0%, #A8D8D8 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(107, 159, 184, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #D4A574;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Detail Hero */
+        .detail-hero {
+            background: linear-gradient(135deg, #6B9FB8 0%, #A8D8D8 25%, #8B9DC3 50%, #D4A574 75%, #CD8B65 100%);
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .detail-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.6s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        /* Detail Content */
+        .detail-content {
+            padding: 50px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .detail-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeInRight 0.6s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .detail-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+        }
+
+        #detailText {
+            animation: fadeInLeft 0.6s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        #detailText p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .detail-info {
+            background: rgba(107, 159, 184, 0.1);
+            border-left: 4px solid #A8D8D8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .detail-info h3 {
+            color: #6B9FB8;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .detail-info p {
+            margin: 0;
+            color: #666;
+            text-align: justify;
+        }
+
+        #detailText h3 {
+            color: #6B9FB8;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        #detailText ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        #detailText li {
+            margin-bottom: 10px;
+            color: #666;
+            text-align: justify;
+        }
+
+        /* Back Button */
+        .back-button-container {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #A8D8D8 0%, #A8D8D8 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(168, 216, 216, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(168, 216, 216, 0.4);
+            background: linear-gradient(135deg, #6B9FB8 0%, #6B9FB8 100%);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(90deg, #6B9FB8 0%, #A8D8D8 100%);
+            color: #333;
+            padding: 60px 20px 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #D4A574;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(107, 159, 184, 0.3);
+            color: #333;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .detail-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: linear-gradient(90deg, #6B9FB8 0%, #A8D8D8 100%);
+                padding: 20px;
+                gap: 1rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-menu.active {
+                max-height: 400px;
+            }
+
+            .detail-hero {
+                padding: 50px 0 30px;
+            }
+
+            .detail-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .detail-hero p {
+                font-size: 1rem;
+            }
+
+            #detailText h3 {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book"></i>
+                <span>KB Al Halal</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#home" class="nav-link">Beranda</a></li>
+                <li><a href="../index.html#tentang" class="nav-link">Tentang Kami</a></li>
+                <li><a href="../index.html#tim" class="nav-link">Tim Pengurus</a></li>
+                <li><a href="../index.html#akreditasi" class="nav-link">Akreditasi</a></li>
+                <li><a href="../index.html#program" class="nav-link">Program Belajar</a></li>
+                <li><a href="../index.html#kegiatan" class="nav-link">Kegiatan</a></li>
+                <li><a href="../index.html#fasilitas" class="nav-link">Fasilitas</a></li>
+                <li><a href="../index.html#kontak" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Detail Hero -->
+        <div class="detail-hero">
+            <h1 id="kategoriTitle">Fasilitas KB Halal</h1>
+            <p id="kategoriSubtitle">Dukungan Lengkap untuk Pembelajaran Optimal</p>
+        </div>
+
+        <!-- Detail Content -->
+        <div class="detail-content">
+            <div id="detailText">
+                <!-- Akan diisi oleh JavaScript -->
+            </div>
+            <div class="detail-image">
+                <img id="detailImage" src="" alt="Fasilitas">
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section" id="gallerySection" style="display: none;">
+            <h2>Galeri Fasilitas</h2>
+            <div id="galleryContainer" class="gallery-grid">
+                <!-- Gallery items akan diisi oleh JavaScript -->
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="../index.html#fasilitas" class="cta-button">
+                <i class="fas fa-arrow-left"></i> Kembali ke Fasilitas
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Kelompok Belajar Al Halal</h4>
+                    <p>Pusat Pembelajaran Islam dan Pemberdayaan Masyarakat untuk Generasi Islami</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Beranda</a></li>
+                        <li><a href="../index.html#tentang">Tentang Kami</a></li>
+                        <li><a href="../index.html#program">Program Belajar</a></li>
+                        <li><a href="../index.html#kegiatan">Kegiatan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ikuti Kami</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/kbalhalal?igsh=a2tsa29semk3Y21o" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://youtube.com/@kbalhalal?si=sCCKOx7MfsRE0rio" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; KKM 14 Abhinaya Seva UIN Maulana Malik Ibrahim Malang 2025/2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const fasilitasData = {
+            1: {
+                title: 'Ruang Kelas yang Nyaman',
+                subtitle: 'Lingkungan Belajar yang Aman dan Menyenangkan',
+                image: '../assets/images/ruang-kelas1.jpeg', 
+                description: `
+                    <p>Ruang kelas KB Halal dirancang khusus untuk memberikan kenyamanan maksimal bagi anak-anak dalam proses belajar. Setiap ruangan dilengkapi dengan fasilitas lengkap dan aman untuk mendukung pembelajaran yang efektif.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-door-open"></i> Desain Ruangan</h3>
+                        <p>Ruangan yang luas dan terang dengan ventilasi udara yang baik, pencahayaan optimal dari cahaya alami dan buatan, serta suhu ruangan yang terjaga dengan AC.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-shield-alt"></i> Standar Keamanan</h3>
+                        <p>Semua perabotan dan perlengkapan telah memenuhi standar keamanan internasional dengan sudut yang aman, material yang tidak beracun, dan tata letak yang menghindari risiko kecelakaan.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-paint-brush"></i> Dekorasi Edukatif</h3>
+                        <p>Dinding dan dekorasi ruangan dirancang dengan warna-warna ceria yang merangsang kreativitas, dilengkapi dengan poster pembelajaran, alfabet, angka, dan karya seni anak.</p>
+                    </div>
+
+                    <h3>Fitur Ruang Kelas:</h3>
+                    <ul>
+                        <li>Kapasitas sesuai dengan rasio guru dan murid yang optimal</li>
+                        <li>Perabotan yang ergonomis untuk anak usia dini</li>
+                        <li>Area bermain indoor yang aman</li>
+                        <li>Toilet anak-anak dengan standar kebersihan tinggi</li>
+                        <li>Fasilitas cuci tangan dan tempat penyimpanan barang pribadi</li>
+                        <li>Ruangan isolasi untuk anak yang tidak enak badan</li>
+                    </ul>
+                `
+            },
+            2: {
+                title: 'Alat Permainan Edukatif (APE) Indoor',
+                subtitle: 'Permainan yang Mengembangkan Kreativitas dan Kognitif',
+                image: '../assets/images/bermain.jpeg',
+                gallery: [
+                    { image: '../assets/images/loker.jpeg', caption: 'Lemari Penyimpanan APE' },
+                    { image: '../assets/images/bermain2.jpeg', caption: 'Anak-Anak Bermain APE' }
+                ],
+                description: `
+                    <p>Koleksi lengkap Alat Permainan Edukatif (APE) indoor kami dirancang untuk mengembangkan berbagai aspek perkembangan anak melalui bermain yang menyenangkan dan interaktif.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-cube"></i> Jenis Permainan</h3>
+                        <p>Permainan blok konstruksi, puzzle, puzzle susun, mainan motorik halus, permainan warna, bentuk, dan berbagai mainan edukatif lainnya yang sesuai dengan perkembangan anak.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-brain"></i> Manfaat Pembelajaran</h3>
+                        <p>APE kami membantu mengembangkan kreativitas, kognitif, motorik halus, pemecahan masalah, koordinasi tangan-mata, dan keterampilan sosial melalui bermain bersama.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-star"></i> Kualitas dan Keamanan</h3>
+                        <p>Semua APE telah melalui uji standar keamanan internasional, menggunakan bahan non-toxic, dan dilakukan pemeliharaan rutin untuk menjaga kebersihan dan keamanan.</p>
+                    </div>
+
+                    <h3>Koleksi APE Kami Mencakup:</h3>
+                    <ul>
+                        <li>Balok kayu dan blok konstruksi berbagai ukuran</li>
+                        <li>Puzzle dan puzzle susun dengan tingkat kesulitan berbeda</li>
+                        <li>Permainan motorik halus seperti manik-manik dan benang</li>
+                        <li>Mainan bentuk dan warna untuk pengenalan konsep dasar</li>
+                        <li>Boneka tangan dan mainan peran untuk bermain imajinatif</li>
+                        <li>Permainan musik dan instrumen sederhana</li>
+                    </ul>
+                `
+            },
+            3: {
+                title: 'Lapangan yang Luas',
+                subtitle: 'Area Bermain Outdoor untuk Aktivitas Fisik',
+                image: '../assets/images/lapangan.jpeg',
+                description: `
+                    <p>Lapangan outdoor KB Halal menyediakan ruang yang luas dan aman untuk anak-anak melakukan berbagai kegiatan fisik, olahraga, dan bermain bebas di udara terbuka.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-basketball"></i> Fasilitas Olahraga</h3>
+                        <p>Lapangan dilengkapi dengan peralatan olahraga untuk anak seperti ayunan, seluncur, jungkat-jungkit, tangga panjat, dan peralatan outdoor lainnya yang aman dan berkualitas.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-sun"></i> Lingkungan Alami</h3>
+                        <p>Lapangan yang terbuka dengan pohon-pohon peneduh, rumput hijau, dan area yang bersih memberikan lingkungan alami yang sehat untuk bermain dan belajar di luar.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Keselamatan</h3>
+                        <p>Area bermain dibuat dengan permukaan yang aman (matras, pasir lembut, atau material anti benturan), pagar pengaman, dan pengawasan staff yang ketat selama kegiatan outdoor.</p>
+                    </div>
+
+                    <h3>Kegiatan di Lapangan:</h3>
+                    <ul>
+                        <li>Senam pagi dan gerakan dasar olahraga</li>
+                        <li>Permainan berlari, merayap, dan melompat</li>
+                        <li>Permainan kelompok dan teamwork</li>
+                        <li>Eksplorasi alam dan kegiatan outdoor learning</li>
+                        <li>Pembelajaran sains melalui observasi alam</li>
+                    </ul>
+                `
+            },
+            4: {
+                title: 'Buku Cerita dan Media Pembelajaran Anak',
+                subtitle: 'Sumber Belajar untuk Mengembangkan Minat Baca',
+                image: '../assets/images/buku-cerita.jpeg',
+                description: `
+                    <p>Perpustakaan mini KB Halal menyediakan koleksi lengkap buku cerita bergambar, buku panduan pembelajaran, dan media edukatif yang mendukung pengembangan literasi anak sejak dini.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-book"></i> Koleksi Buku</h3>
+                        <p>Buku cerita bergambar dengan tema beragam seperti cerita rakyat, dongeng, buku tentang hewan dan tumbuhan, serta buku-buku yang mengandung nilai-nilai moral dan Islam.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-lightbulb"></i> Media Pembelajaran Interaktif</h3>
+                        <p>Selain buku, tersedia media pembelajaran seperti kartu flashcard, poster edukatif, majalah anak, dan buku-buku aktivitas yang dirancang untuk anak usia dini.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-graduation-cap"></i> Panduan Orang Tua</h3>
+                        <p>Kami juga menyediakan buku panduan untuk orang tua tentang cara mendukung perkembangan anak, tips mengajar di rumah, dan informasi tentang milestone perkembangan anak.</p>
+                    </div>
+
+                    <h3>Manfaat Membaca:</h3>
+                    <ul>
+                        <li>Mengembangkan minat dan kecintaan terhadap membaca</li>
+                        <li>Meningkatkan kosakata dan kemampuan bahasa</li>
+                        <li>Merangsang imajinasi dan kreativitas</li>
+                        <li>Mengenalkan nilai-nilai moral dan ajaran Islam sejak dini</li>
+                        <li>Waktu berkualitas antara guru dan anak melalui story time</li>
+                    </ul>
+                `
+            },
+            5: {
+                title: 'Media Pembelajaran Audio Visual',
+                subtitle: 'Teknologi untuk Pembelajaran Interaktif Modern',
+                image: '../assets/images/kegiatan-sosial.png',
+                description: `
+                    <p>KB Halal dilengkapi dengan media pembelajaran audio visual modern yang mendukung pembelajaran interaktif dan menarik untuk anak-anak di era digital ini.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-tv"></i> Peralatan Multimedia</h3>
+                        <p>Kami memiliki proyektor berkualitas, layar digital, speaker stereo, dan komputer/tablet yang digunakan untuk pembelajaran interaktif dan menampilkan konten edukatif berkualitas.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-music"></i> Konten Edukatif</h3>
+                        <p>Video pembelajaran tentang berbagai topik, lagu edukatif, presentasi interaktif, serta konten visual yang mendukung setiap tema pembelajaran dan sesuai dengan usia anak.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-shield-alt"></i> Pembelajaran Aman</h3>
+                        <p>Semua konten telah diseleksi dengan cermat untuk memastikan kesesuaian dengan usia anak, standar pendidikan, dan nilai-nilai Islam. Penggunaan diawasi ketat oleh guru.</p>
+                    </div>
+
+                    <h3>Penggunaan Media Audio Visual:</h3>
+                    <ul>
+                        <li>Video pembelajaran interaktif tentang topik spesifik</li>
+                        <li>Lagu dan musik edukatif dalam bahasa Indonesia dan Inggris</li>
+                        <li>Cerita digital dan animasi yang menarik</li>
+                        <li>Presentasi visual untuk pengenalan huruf, angka, dan warna</li>
+                        <li>Dokumentasi dan sharing kegiatan dengan orang tua</li>
+                        <li>Pembelajaran tentang dunia digital dan literasi media untuk anak</li>
+                    </ul>
+                `
+            }
+        };
+
+        function loadFacility() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const facilityId = urlParams.get('id') || '1';
+            const data = fasilitasData[facilityId];
+
+            if (data) {
+                document.getElementById('kategoriTitle').textContent = data.title;
+                document.getElementById('kategoriSubtitle').textContent = data.subtitle;
+                document.getElementById('detailImage').src = data.image;
+                document.getElementById('detailImage').alt = data.title;
+                document.getElementById('detailText').innerHTML = data.description;
+
+                // Load gallery if exists
+                if (data.gallery && data.gallery.length > 0) {
+                    const gallerySection = document.getElementById('gallerySection');
+                    const galleryContainer = document.getElementById('galleryContainer');
+                    galleryContainer.innerHTML = '';
+
+                    data.gallery.forEach(item => {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item';
+                        galleryItem.innerHTML = `
+                            <img src="${item.image}" alt="${item.caption}">
+                            <div class="gallery-caption">${item.caption}</div>
+                        `;
+                        galleryContainer.appendChild(galleryItem);
+                    });
+
+                    gallerySection.style.display = 'block';
+                }
+            }
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Load facility on page load
+        window.addEventListener('load', loadFacility);
+    </script>
+</body>
+</html>

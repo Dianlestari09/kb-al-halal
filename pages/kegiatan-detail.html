@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detail Kegiatan KB Halal">
+    <title>Detail Kegiatan KB Halal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #F5F8FB 0%, #FFFBF8 100%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(90deg, #6B9FB8 0%, #A8D8D8 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(107, 159, 184, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #D4A574;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Detail Hero */
+        .detail-hero {
+            background: linear-gradient(135deg, #6B9FB8 0%, #A8D8D8 25%, #8B9DC3 50%, #D4A574 75%, #CD8B65 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .detail-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Detail Content */
+        .detail-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 3rem;
+            padding: 50px 0;
+        }
+
+        .detail-description {
+            animation: fadeInLeft 0.6s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .detail-description h2 {
+            color: #6B9FB8;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        #detailText {
+            animation: fadeInLeft 0.6s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        #detailText p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .detail-info {
+            background: rgba(107, 159, 184, 0.1);
+            border-left: 4px solid #A8D8D8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .detail-info h3 {
+            color: #6B9FB8;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .detail-info p {
+            margin: 0;
+            color: #666;
+            text-align: justify;
+        }
+
+        #detailText h3 {
+            color: #6B9FB8;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        #detailText ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        #detailText li {
+            margin-bottom: 10px;
+            color: #666;
+            text-align: justify;
+        }
+
+        /* Detail Gallery */
+        .detail-gallery {
+            animation: fadeInRight 0.6s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        #galleryContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin: 3rem 0;
+        }
+
+        .gallery-section h2 {
+            color: #6B9FB8;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+            border-bottom: 3px solid #A8D8D8;
+            padding-bottom: 1rem;
+        }
+
+        .gallery-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #A8D8D8 0%, #A8D8D8 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #6B9FB8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(107, 159, 184, 0.3);
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(90deg, #6B9FB8 0%, #A8D8D8 100%);
+            color: #333;
+            padding: 60px 20px 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 40px;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #D4A574;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(107, 159, 184, 0.3);
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: #2d5016;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu li {
+                padding: 0.5rem 1.5rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book"></i>
+                <span>KB Halal</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#home" class="nav-link">Beranda</a></li>
+                <li><a href="../index.html#tentang" class="nav-link">Tentang Kami</a></li>
+                <li><a href="../index.html#tim" class="nav-link">Tim Pengurus</a></li>
+                <li><a href="../index.html#akreditasi" class="nav-link">Akreditasi</a></li>
+                <li><a href="../index.html#program" class="nav-link">Program Belajar</a></li>
+                <li><a href="../index.html#kegiatan" class="nav-link">Kegiatan</a></li>
+                <li><a href="../index.html#fasilitas" class="nav-link">Fasilitas</a></li>
+                <li><a href="../index.html#kontak" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Detail Hero -->
+        <div class="detail-hero">
+            <div class="container">
+                <h1 id="kategoriTitle">Tadarus & Hafalan</h1>
+                <p id="kategoriSubtitle">Pelajari lebih lanjut tentang kegiatan kami</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="detail-content">
+            <div class="detail-description">
+                <h2>Penjelasan Kegiatan</h2>
+                <div id="detailText">
+                    <!-- Konten akan diisi oleh JavaScript berdasarkan kategori -->
+                </div>
+            </div>
+            <div class="detail-gallery">
+                <div id="galleryContainer">
+                    <!-- Galeri akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="../index.html#kegiatan" class="cta-button">
+                <i class="fas fa-arrow-left"></i> Kembali ke Kegiatan
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Kelompok Belajar Al Halal</h4>
+                    <p>Pusat Pembelajaran Islam dan Pemberdayaan Masyarakat untuk Generasi Islami</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Beranda</a></li>
+                        <li><a href="../index.html#tentang">Tentang Kami</a></li>
+                        <li><a href="../index.html#program">Program Belajar</a></li>
+                        <li><a href="../index.html#kegiatan">Kegiatan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ikuti Kami</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/kbalhalal?igsh=a2tsa29semk3Y21o" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://youtube.com/@kbalhalal?si=sCCKOx7MfsRE0rio" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; KKM 14 Abhinaya Seva UIN Maulana Malik Ibrahim Malang 2025/2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const kegiatanData = {
+            doa: {
+                title: 'Doa dan Pembiasaan Ibadah',
+                subtitle: 'Pembelajaran Praktik Ibadah Sehari-hari',
+                image: '../assets/images/doa-pembiasaan.jpeg',
+                description: `
+                    <p>Doa dan Pembiasaan Ibadah di KB Halal adalah program yang mengajarkan anak-anak untuk terbiasa melakukan ibadah sehari-hari dengan baik dan benar, serta memahami makna doa-doa penting dalam kehidupan sehari-hari.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-hands-praying"></i> Materi Pembelajaran</h3>
+                        <p>Doa-doa Islami, Tata Cara Wudhu, Shalat, dan Amalan-amalan Harian</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-heart"></i> Tujuan</h3>
+                        <p>Membentuk kebiasaan ibadah yang baik sejak dini dan memahami pentingnya berserah diri kepada Allah SWT</p>
+                    </div>
+
+                    <h3>Aspek Pembelajaran:</h3>
+                    <ul>
+                        <li>Doa-doa Harian (Pagi, Sore, Sebelum Tidur)</li>
+                        <li>Tata Cara Wudhu yang Benar</li>
+                        <li>Gerakan dan Bacaan Shalat</li>
+                        <li>Akhlak Islami dalam Kehidupan Sehari-hari</li>
+                        <li>Pembiasaan Berbuat Baik dan Taat kepada Orang Tua</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/doa-pembiasaan.jpeg', caption: 'Doa' },
+                    { image: '../assets/images/ibadah-pembiasaan1.jpeg', caption: 'Pembiasaan Ibadah' }
+                ]
+            },
+            senam: {
+                title: 'Senam & Permainan Motorik',
+                subtitle: 'Pengembangan Kesehatan dan Keterampilan Fisik',
+                image: '../assets/images/senam.jpeg',
+                description: `
+                    <p>Senam & Permainan Motorik di KB Halal adalah program yang dirancang untuk mengembangkan kemampuan fisik anak melalui kegiatan senam pagi yang menyenangkan dan permainan yang merangsang perkembangan motorik kasar dan halus.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-person-hiking"></i> Jenis Kegiatan</h3>
+                        <p>Senam Pagi, Permainan Motorik Kasar, Permainan Motorik Halus, dan Aktivitas Outdoor</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-heart-pulse"></i> Manfaat Kesehatan</h3>
+                        <p>Meningkatkan kesehatan fisik, koordinasi tubuh, kekuatan otot, keseimbangan, dan kepercayaan diri anak</p>
+                    </div>
+
+                    <h3>Aspek Pembelajaran:</h3>
+                    <ul>
+                        <li>Senam Pagi untuk Melentur Tubuh dan Meningkatkan Energi</li>
+                        <li>Permainan Motorik Kasar (Lari, Melompat, Melempar)</li>
+                        <li>Permainan Motorik Halus (Menggunting, Melipat, Menulis)</li>
+                        <li>Olahraga Sederhana dan Permainan Kelompok</li>
+                        <li>Kesadaran akan Pentingnya Hidup Sehat</li>
+                        <li>Kerjasama dan Sportivitas dalam Bermain</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/senam.jpeg', caption: 'Senam Pagi' }
+                ]
+            },
+            ekskul: {
+                title: 'Ekstrakurikuler Mengaji',
+                subtitle: 'Program Ekstrakurikuler Al-Qur\'an',
+                image: '../assets/images/ekstra-mengaji1.jpeg',
+                description: `
+                    <p>Ekstrakurikuler Mengaji adalah kegiatan tambahan di luar jam pelajaran regular yang dirancang untuk meningkatkan kemampuan anak dalam membaca dan menghafal Al-Qur'an dengan metode pembelajaran yang menyenangkan dan interaktif.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-book-quran"></i> Metode Pembelajaran</h3>
+                        <p>Iqra, An-Noor, dan Metode Tartil Modern</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-star"></i> Target Peserta</h3>
+                        <p>Peserta yang ingin meningkatkan kemampuan membaca Al-Qur'an dari tingkat pemula hingga lanjutan</p>
+                    </div>
+
+                    <h3>Hasil yang Diharapkan:</h3>
+                    <ul>
+                        <li>Kemampuan Membaca Al-Qur'an dengan Fasih dan Tartil</li>
+                        <li>Hafalan Ayat-ayat Pilihan</li>
+                        <li>Pemahaman Makna dan Konteks Ayat</li>
+                        <li>Rasa Cinta dan Hormat kepada Al-Qur'an</li>
+                        <li>Disiplin dan Komitmen dalam Belajar</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/ekstra-mengaji1.jpeg', caption: 'Ekstrakurikuler Mengaji' },
+                    { image: '../assets/images/ekstra-mengaji2.jpeg', caption: 'Ekstrakurikuler Mengaji' }
+                ]
+            },
+            puncaktema: {
+                title: 'Puncak Tema',
+                subtitle: 'Acara Puncak Pembelajaran Tematik',
+                image: '../assets/images/mewarnai1.jpeg',
+                description: `
+                    <p>Puncak Tema adalah kegiatan penutup dari setiap pembelajaran tematik yang melibatkan seluruh anak didik dalam aktivitas kreatif dan menyenangkan seperti mewarnai, bernyanyi, dan bermain sesuai dengan tema pembelajaran.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-palette"></i> Kegiatan Kreatif</h3>
+                        <p>Mewarnai, Menggambar, Membuat Karya Seni, dan Aktivitas Kreatif Lainnya</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-lightbulb"></i> Manfaat</h3>
+                        <p>Mengasah Kreativitas, Mengembangkan Motorik Halus, dan Merayakan Pembelajaran Bersama</p>
+                    </div>
+
+                    <h3>Tema Pembelajaran Sebelumnya:</h3>
+                    <ul>
+                        <li>Tema Keluarga dan Kasih Sayang</li>
+                        <li>Tema Alam dan Lingkungan</li>
+                        <li>Tema Hewan-Hewan Kesayangan</li>
+                        <li>Tema Pakaian dan Busana</li>
+                        <li>Tema Makanan Sehat dan Bergizi</li>
+                        <li>Tema Profesi dan Pekerjaan</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/mewarnai1.jpeg', caption: 'Mewarnai' },
+                    { image: '../assets/images/mewarnai2.jpeg', caption: 'Mewarnai' }
+                ]
+            },
+            tadarus: {
+                title: 'Tadarus & Hafalan',
+                subtitle: 'Program Intensif Al-Qur\'an',
+                image: '../assets/images/tadarus-alquran.png',
+                description: `
+                    <p>Tadarus & Hafalan adalah program unggulan KB Halal yang dirancang untuk membantu peserta mendalami Al-Qur'an melalui pengalaman membaca bersama dan menghafal ayat-ayat suci.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-clock"></i> Jadwal</h3>
+                        <p><strong>Senin - Jumat:</strong> Pukul 19:00 - 21:00</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-target"></i> Target</h3>
+                        <p>Membantu peserta menghafal ayat-ayat Al-Qur'an dengan fasih dan memahami maknanya secara mendalam.</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-users"></i> Peserta</h3>
+                        <p>Terbuka untuk semua kalangan dari anak-anak hingga dewasa dengan berbagai tingkat kemampuan.</p>
+                    </div>
+
+                    <h3>Manfaat Program:</h3>
+                    <ul>
+                        <li>Peningkatan kemampuan membaca Al-Qur'an dengan tartil yang benar</li>
+                        <li>Hafalan ayat-ayat suci Al-Qur'an secara konsisten</li>
+                        <li>Pemahaman mendalam tentang makna ayat-ayat Al-Qur'an</li>
+                        <li>Komunitas pembelajaran yang suportif dan menyenangkan</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/tadarus-alquran.png', caption: 'Tadarus' },
+                    { image: '../assets/images/kelas-belajar.png', caption: 'Kelas Belajar' },
+                    { image: '../assets/images/tadarus-alquran.png', caption: 'Hafalan Ayat' }
+                ]
+            },
+            pengajaran: {
+                title: 'Pengajaran Islam',
+                subtitle: 'Pembelajaran Agama Islam Komprehensif',
+                image: '../assets/images/kelas-belajar.png',
+                description: `
+                    <p>Pengajaran Islam di KB Halal mencakup pembelajaran mendalam tentang berbagai aspek agama Islam yang disajikan secara sistematis dan mudah dipahami oleh semua kalangan.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-clock"></i> Jadwal</h3>
+                        <p>Disesuaikan dengan kebutuhan peserta dan program spesifik</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-book"></i> Materi Pembelajaran</h3>
+                        <p>Aqidah (Kepercayaan), Akhlak (Moral), Fiqih (Hukum), dan Hadis (Sunnah Nabi)</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-graduation-cap"></i> Pengajar</h3>
+                        <p>Tim pengajar yang berpengalaman dan memiliki sertifikasi di bidang pendidikan Islam</p>
+                    </div>
+
+                    <h3>Kurikulum Kami:</h3>
+                    <ul>
+                        <li>Dasar-dasar Aqidah Islamiah</li>
+                        <li>Akhlak Mulia dan Adab Islam</li>
+                        <li>Fiqih Ibadah dan Mu\'amalah</li>
+                        <li>Hadis dan Sunnah Nabi Muhammad</li>
+                        <li>Sejarah Islam dan Tokoh-tokoh Besar</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/kelas-belajar.png', caption: 'Pengajaran Islam' },
+                    { image: '../assets/images/tadarus-alquran.png', caption: 'Hafalan' },
+                    { image: '../assets/images/kelas-anak-anak.png', caption: 'Kelas Anak-Anak' }
+                ]
+            },
+            bahasa: {
+                title: 'Kelas Bahasa Arab',
+                subtitle: 'Belajar Bahasa Arab untuk Memahami Islam',
+                image: '../assets/images/kelas-bahasa-arab.png',
+                description: `
+                    <p>Kelas Bahasa Arab di KB Halal dirancang untuk membantu peserta mempelajari bahasa Arab dari tingkat pemula hingga lanjutan, sehingga dapat memahami Al-Qur'an dan sumber-sumber ilmu Islam lainnya secara lebih baik.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-clock"></i> Jadwal</h3>
+                        <p><strong>Selasa & Kamis:</strong> Pukul 18:00 - 19:30</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-level-up-alt"></i> Tingkat</h3>
+                        <p>Pemula, Menengah, dan Lanjutan - disesuaikan dengan kemampuan peserta</p>
+                    </div>
+
+                    <h3>Apa yang akan Anda Pelajari:</h3>
+                    <ul>
+                        <li>Kosakata Bahasa Arab Dasar dan Lanjutan</li>
+                        <li>Tata Bahasa Arab (Qawaid)</li>
+                        <li>Kemampuan Berbicara dan Mendengarkan</li>
+                        <li>Membaca dan Menulis Bahasa Arab</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/kelas-bahasa-arab.png', caption: 'Bahasa Arab' },
+                    { image: '../assets/images/kelas-belajar.png', caption: 'Pembelajaran' }
+                ]
+            },
+            diskusi: {
+                title: 'Diskusi & Tausiyah',
+                subtitle: 'Forum Diskusi dan Nasihat Islam',
+                image: '../assets/images/diskusi-tausiyah.png',
+                description: `
+                    <p>Diskusi & Tausiyah adalah forum terbuka di mana anggota KB Halal dapat berbagi wawasan, bertanya tentang hal-hal keagamaan, dan mendapatkan nasihat dari guru-guru berpengalaman dalam lingkungan yang kondusif.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-clock"></i> Jadwal</h3>
+                        <p><strong>Bulanan:</strong> Jadwal akan diumumkan melalui grup resmi</p>
+                    </div>
+
+                    <h3>Topik Diskusi yang Sering Dibahas:</h3>
+                    <ul>
+                        <li>Problematika Kehidupan Modern dan Perspektif Islam</li>
+                        <li>Hukum-hukum Islam dalam Kehidupan Sehari-hari</li>
+                        <li>Akhlak dan Kepribadian Muslim</li>
+                        <li>Keluarga dan Pendidikan Anak dalam Islam</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/diskusi-tausiyah.png', caption: 'Diskusi' },
+                    { image: '../assets/images/kegiatan-sosial.png', caption: 'Tausiyah' }
+                ]
+            },
+            sosial: {
+                title: 'Program Bakti Sosial',
+                subtitle: 'Kegiatan Sosial dan Pemberdayaan Masyarakat',
+                image: '../assets/images/kegiatan-sosial.png',
+                description: `
+                    <p>Program Bakti Sosial KB Halal adalah wujud dari komitmen kami untuk memberikan kontribusi nyata kepada masyarakat melalui berbagai kegiatan sosial, pendidikan, dan pemberdayaan ekonomi.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-heart"></i> Visi Sosial</h3>
+                        <p>Menciptakan masyarakat yang sejahtera, berpengetahuan, dan bermoral tinggi melalui bantuan dan pemberdayaan</p>
+                    </div>
+
+                    <h3>Program Sosial Kami:</h3>
+                    <ul>
+                        <li>Distribusi Bantuan Pangan untuk Keluarga Kurang Mampu</li>
+                        <li>Program Beasiswa untuk Pelajar Berprestasi</li>
+                        <li>Klinik Kesehatan Gratis Bulanan</li>
+                        <li>Pelatihan Keterampilan untuk Pemberdayaan Ekonomi</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/kegiatan-sosial.png', caption: 'Bakti Sosial' },
+                    { image: '../assets/images/tadarus-alquran.png', caption: 'Kegiatan Sosial' }
+                ]
+            },
+            spesial: {
+                title: 'Acara Spesial',
+                subtitle: 'Perayaan dan Acara Khusus KB Halal',
+                image: '../assets/images/tadarus-alquran.png',
+                description: `
+                    <p>Acara Spesial KB Halal adalah momen-momen istimewa yang kami rayakan bersama untuk mempererat hubungan persaudaraan, merayakan hari-hari besar Islam, dan mengadakan kegiatan akademik yang menantang.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-calendar-alt"></i> Jenis Acara</h3>
+                        <p>Perayaan hari-hari besar Islam, pengajian umum, perlombaan akademik, dan gathering anggota</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-star"></i> Tujuan</h3>
+                        <p>Mempererat silaturrahmi, meningkatkan semangat belajar, dan menciptakan kenangan indah bersama keluarga besar KB Halal</p>
+                    </div>
+
+                    <h3>Acara yang Rutin Kami Selenggarakan:</h3>
+                    <ul>
+                        <li>Perayaan Maulid Nabi Muhammad SAW</li>
+                        <li>Perayaan Isra' dan Miraj</li>
+                        <li>Pengajian Umum Berhadiah</li>
+                        <li>Lomba Tadarus dan Hafalan Alquran</li>
+                        <li>Gathering dan Makan Bersama Anggota KB Halal</li>
+                        <li>Pentas Seni dan Pertunjukan Keagamaan</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/tadarus-alquran.png', caption: 'Tadarus Al-Qur\'an' },
+                    { image: '../assets/images/kelas-belajar.png', caption: 'Kelas Belajar' },
+                    { image: '../assets/images/kegiatan-sosial.png', caption: 'Kegiatan Sosial' }
+                ]
+            },
+            outing: {
+                title: 'Outing Class',
+                subtitle: 'Kunjungan Edukatif dan Wisata Pembelajaran',
+                image: '../assets/images/kunjungan-balai-kota.jpeg',
+                description: `
+                    <p>Outing Class di KB Halal adalah kegiatan pembelajaran di luar kelas yang dirancang untuk memberikan pengalaman edukatif langsung kepada peserta melalui kunjungan ke berbagai tempat bersejarah, institusi pemerintahan, dan destinasi wisata yang bernilai pembelajaran.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-map-location-dot"></i> Lokasi Kunjungan</h3>
+                        <p>Balai Kota, Museum, Taman Bersejarah, Tempat Wisata Edukatif, dan institusi penting lainnya</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-lightbulb"></i> Tujuan Pembelajaran</h3>
+                        <p>Meningkatkan pemahaman peserta tentang sejarah, budaya, lingkungan, dan nilai-nilai kebangsaan melalui pengalaman langsung</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-users"></i> Peserta</h3>
+                        <p>Semua peserta KB Halal dengan pendampingan guru dan orangtua, menciptakan pembelajaran yang menyenangkan dan berkesan</p>
+                    </div>
+
+                    <h3>Manfaat Outing Class:</h3>
+                    <ul>
+                        <li>Pembelajaran langsung dan pengalaman edukatif yang mendalam</li>
+                        <li>Meningkatkan pengetahuan tentang sejarah dan budaya lokal</li>
+                        <li>Memperkuat nilai-nilai nasionalisme dan cinta tanah air</li>
+                        <li>Membangun kebersamaan dan persaudaraan antar peserta</li>
+                        <li>Menciptakan kenangan indah dan pembelajaran yang tak terlupakan</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/kunjungan-balai-kota.jpeg', caption: 'Kunjungan Balaikota' },
+                    { image: '../assets/images/kunjungan-wisata.jpeg', caption: 'Kunjungan Wisata' }
+                ]
+            },
+            harisbesar: {
+                title: 'Peringatan Hari Besar',
+                subtitle: 'Perayaan Hari-Hari Besar Nasional dan Islami',
+                image: '../assets/images/pondok-ramadhan.jpeg',
+                description: `
+                    <p>Peringatan Hari Besar di KB Halal adalah kegiatan merayakan hari-hari spesial nasional dan islami dengan berbagai acara seru dan edukatif yang melibatkan seluruh anak didik dan orangtua.</p>
+                    
+                    <div class="detail-info">
+                        <h3><i class="fas fa-calendar-check"></i> Hari-Hari yang Dirayakan</h3>
+                        <p>Ramadan, Lebaran, Hari Kemerdekaan, Hari Santri, dan berbagai perayaan nasional dan islami lainnya</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-party-horn"></i> Kegiatan Perayaan</h3>
+                        <p>Acara khusus, lomba, pertunjukan, bazar makanan, dan kegiatan edukatif yang tematik sesuai dengan perayaan</p>
+                    </div>
+
+                    <div class="detail-info">
+                        <h3><i class="fas fa-users"></i> Partisipasi</h3>
+                        <p>Melibatkan seluruh siswa, guru, orangtua, dan masyarakat sekitar dalam merayakan momen spesial ini</p>
+                    </div>
+
+                    <h3>Manfaat Peringatan Hari Besar:</h3>
+                    <ul>
+                        <li>Meningkatkan rasa kebersamaan dan persatuan</li>
+                        <li>Mengenalkan nilai-nilai islami dan nasionalisme kepada anak</li>
+                        <li>Menciptakan kenangan indah bagi anak-anak</li>
+                        <li>Menghibur dan memberikan pengalaman pembelajaran yang unik</li>
+                        <li>Memperkuat hubungan antara sekolah, keluarga, dan masyarakat</li>
+                    </ul>
+                `,
+                gallery: [
+                    { image: '../assets/images/pondok-ramadhan.jpeg', caption: 'Pondok Ramadhan' },
+                    { image: '../assets/images/maulid-nabi.jpeg', caption: 'Maulid Nabi' }
+                ]
+            }
+        };
+
+        // Get kategori dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const kategori = urlParams.get('kategori') || 'tadarus';
+        const data = kegiatanData[kategori];
+
+        if (data) {
+            document.getElementById('kategoriTitle').textContent = data.title;
+            document.getElementById('kategoriSubtitle').textContent = data.subtitle;
+            document.getElementById('detailText').innerHTML = data.description;
+
+            // Load Gallery
+            const galleryContainer = document.getElementById('galleryContainer');
+            if (data.gallery && data.gallery.length > 0) {
+                galleryContainer.innerHTML = data.gallery.map(item => {
+                    if (typeof item === 'string') {
+                        // Old format (backward compatibility)
+                        return `
+                            <div class="gallery-item">
+                                <img src="${item}" alt="${data.title}">
+                            </div>
+                        `;
+                    } else {
+                        // New format with caption
+                        return `
+                            <div class="gallery-item">
+                                <img src="${item.image}" alt="${item.caption}">
+                                <div class="gallery-caption">${item.caption}</div>
+                            </div>
+                        `;
+                    }
+                }).join('');
+            }
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
