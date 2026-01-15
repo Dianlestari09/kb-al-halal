@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Detail Kegiatan KB Halal">
     <title>Detail Kegiatan KB Halal</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -109,8 +110,8 @@
 
         /* Detail Content */
         .detail-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 40px;
             margin-bottom: 3rem;
             padding: 50px 0;
@@ -178,16 +179,33 @@
             text-align: justify;
         }
 
+        #detailText img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
         /* Detail Gallery */
         .detail-gallery {
-            animation: fadeInRight 0.6s ease-out 0.3s;
+            animation: fadeInUp 0.6s ease-out 0.3s;
             animation-fill-mode: both;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         #galleryContainer {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            justify-items: center;
         }
 
         .gallery-item {
@@ -196,13 +214,16 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             width: 100%;
+            max-width: 350px;
         }
 
         .gallery-item img {
             width: 100%;
-            height: auto;
+            height: 250px;
+            object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .gallery-item:hover img {
@@ -228,6 +249,65 @@
             transform: translateY(0);
         }
 
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            color: #A8D8D8;
+            transform: scale(1.2);
+        }
+
         /* Gallery Section */
         .gallery-section {
             margin: 3rem 0;
@@ -243,8 +323,8 @@
         }
 
         .gallery-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -337,15 +417,25 @@
         /* Responsive */
         @media (max-width: 768px) {
             .detail-content {
-                grid-template-columns: 1fr;
+                flex-direction: column;
             }
 
             .detail-hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            #galleryContainer {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .gallery-item img {
+                height: 200px;
             }
 
             .nav-menu {
@@ -370,6 +460,46 @@
 
             .menu-toggle {
                 display: flex;
+            }
+
+            .detail-gallery {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .detail-hero h1 {
+                font-size: 1.2rem;
+            }
+
+            #galleryContainer {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .gallery-item {
+                border-radius: 6px;
+            }
+
+            .gallery-caption {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+
+            .gallery-item img {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
             }
         }
     </style>
@@ -432,6 +562,15 @@
         </div>
     </div>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -485,7 +624,7 @@
 
                     <h3>Aspek Pembelajaran:</h3>
                     <ul>
-                        <li>Doa-doa Harian (Pagi, Sore, Sebelum Tidur)</li>
+                        <li>Doa-doa Harian</li>
                         <li>Tata Cara Wudhu yang Benar</li>
                         <li>Gerakan dan Bacaan Shalat</li>
                         <li>Akhlak Islami dalam Kehidupan Sehari-hari</li>
@@ -525,7 +664,8 @@
                     </ul>
                 `,
                 gallery: [
-                    { image: '../assets/images/senam.jpeg', caption: 'Senam Pagi' }
+                    { image: '../assets/images/senam.jpeg', caption: 'Senam Pagi' },
+                      { image: '../assets/images/senam2.jpeg', caption: 'Senam Pagi' }
                 ]
             },
             ekskul: {
@@ -818,7 +958,7 @@
                 subtitle: 'Perayaan Hari-Hari Besar Nasional dan Islami',
                 image: '../assets/images/pondok-ramadhan.jpeg',
                 description: `
-                    <p>Peringatan Hari Besar di KB Halal adalah kegiatan merayakan hari-hari spesial nasional dan islami dengan berbagai acara seru dan edukatif yang melibatkan seluruh anak didik dan orangtua.</p>
+                    <p>Peringatan Hari Besar di KB Halal adalah kegiatan merayakan hari-hari spesial nasional dan islami dengan berbagai acara seru dan edukatif yang melibatkan seluruh anak didik.</p>
                     
                     <div class="detail-info">
                         <h3><i class="fas fa-calendar-check"></i> Hari-Hari yang Dirayakan</h3>
@@ -846,7 +986,8 @@
                 `,
                 gallery: [
                     { image: '../assets/images/pondok-ramadhan.jpeg', caption: 'Pondok Ramadhan' },
-                    { image: '../assets/images/maulid-nabi.jpeg', caption: 'Maulid Nabi' }
+                    { image: '../assets/images/maulid-nabi.jpeg', caption: 'Maulid Nabi' },
+                    { image: '../assets/images/isramiraj.jpeg', caption: 'Isra Miraj '}
                 ]
             }
         };
@@ -869,20 +1010,62 @@
                         // Old format (backward compatibility)
                         return `
                             <div class="gallery-item">
-                                <img src="${item}" alt="${data.title}">
+                                <img src="${item}" alt="${data.title}" class="gallery-img">
                             </div>
                         `;
                     } else {
                         // New format with caption
                         return `
                             <div class="gallery-item">
-                                <img src="${item.image}" alt="${item.caption}">
+                                <img src="${item.image}" alt="${item.caption}" class="gallery-img" data-caption="${item.caption}">
                                 <div class="gallery-caption">${item.caption}</div>
                             </div>
                         `;
                     }
                 }).join('');
+
+                // Initialize lightbox for gallery images
+                initGalleryLightbox();
             }
+        }
+
+        // Lightbox functionality
+        function initGalleryLightbox() {
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const galleryImages = document.querySelectorAll('.gallery-img');
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    lightboxImage.src = img.src;
+                    lightboxCaption.textContent = img.dataset.caption || '';
+                    lightboxModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            lightboxClose.addEventListener('click', () => {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) {
+                    lightboxModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Close on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                    lightboxModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
 
         // Mobile menu toggle

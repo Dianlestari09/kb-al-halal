@@ -29,54 +29,13 @@ document.addEventListener('click', (e) => {
 });
 
 // ============================================
-// PRAYER TIME CALCULATION
-// ============================================
-
-function calculatePrayerTimes() {
-    // Get today's date
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const date = today.getDate();
-
-    // Default prayer times (adjust according to your location)
-    // These are sample times and should be updated based on your city
-    const prayerTimes = {
-        1: { subuh: '04:45', dzuhur: '12:15', ashar: '15:45', maghrib: '18:10', isya: '19:40' },
-        2: { subuh: '04:30', dzuhur: '12:20', ashar: '16:00', maghrib: '18:30', isya: '20:00' },
-        3: { subuh: '04:10', dzuhur: '12:25', ashar: '16:10', maghrib: '18:50', isya: '20:15' },
-        4: { subuh: '03:50', dzuhur: '12:30', ashar: '16:20', maghrib: '19:10', isya: '20:30' },
-        5: { subuh: '03:35', dzuhur: '12:35', ashar: '16:25', maghrib: '19:25', isya: '20:40' },
-        6: { subuh: '03:30', dzuhur: '12:40', ashar: '16:30', maghrib: '19:35', isya: '20:50' },
-        7: { subuh: '03:45', dzuhur: '12:35', ashar: '16:25', maghrib: '19:30', isya: '20:45' },
-        8: { subuh: '04:00', dzuhur: '12:30', ashar: '16:15', maghrib: '19:15', isya: '20:30' },
-        9: { subuh: '04:15', dzuhur: '12:25', ashar: '16:00', maghrib: '18:55', isya: '20:15' },
-        10: { subuh: '04:30', dzuhur: '12:20', ashar: '15:50', maghrib: '18:35', isya: '20:00' },
-        11: { subuh: '04:45', dzuhur: '12:15', ashar: '15:45', maghrib: '18:20', isya: '19:45' },
-        12: { subuh: '05:00', dzuhur: '12:10', ashar: '15:40', maghrib: '18:15', isya: '19:40' }
-    };
-
-    // Get times for current month or use default
-    const times = prayerTimes[month] || prayerTimes[1];
-
-    // Update prayer times on page
-    document.getElementById('subuh').textContent = times.subuh;
-    document.getElementById('dzuhur').textContent = times.dzuhur;
-    document.getElementById('ashar').textContent = times.ashar;
-    document.getElementById('maghrib').textContent = times.maghrib;
-    document.getElementById('isya').textContent = times.isya;
-}
-
-// Calculate prayer times on page load
-document.addEventListener('DOMContentLoaded', calculatePrayerTimes);
-
-// ============================================
 // CONTACT FORM HANDLING
 // ============================================
 
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         // Get form data
@@ -103,36 +62,6 @@ if (contactForm) {
 
         // Reset form
         this.reset();
-
-        // Here you can add code to send the form data to your backend
-        // Example using fetch:
-        /*
-        fetch('process_contact.php', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                showNotification('Pesan berhasil dikirim!', 'success');
-                contactForm.reset();
-            } else {
-                showNotification('Terjadi kesalahan, silakan coba lagi', 'error');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showNotification('Terjadi kesalahan, silakan coba lagi', 'error');
-        });
-        */
     });
 }
 
@@ -257,7 +186,7 @@ const observerOptions = {
     rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver(function(entries) {
+const observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
@@ -274,22 +203,7 @@ document.querySelectorAll('.activity-card, .gallery-item, .prayer-card, .info-ca
 });
 
 // ============================================
-// CTA BUTTON CLICK HANDLING
-// ============================================
 
-document.querySelectorAll('.cta-button').forEach(button => {
-    button.addEventListener('click', function(e) {
-        if (this.id === 'contactForm' || this.closest('form')) {
-            return; // Don't scroll if it's a form submission
-        }
-        // Scroll to contact section
-        document.getElementById('kontak').scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// ============================================
 // ACTIVE NAV LINK HIGHLIGHTING
 // ============================================
 
@@ -320,47 +234,6 @@ function updateActiveNavLink() {
 // Add active state styling
 const style = document.createElement('style');
 style.textContent = `
-    .nav-link.active {
-        color: var(--accent-color) !important;
-        border-bottom: 2px solid var(--accent-color);
-        padding-bottom: 5px;
-    }
-`;
-document.head.appendChild(style);
-
-updateActiveNavLink();
-
-// ============================================
-// GALLERY LIGHTBOX
-// ============================================
-
-function initGalleryLightbox() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            const src = img.src;
-            const alt = img.alt;
-
-            showLightbox(src, alt);
-        });
-    });
-}
-
-function showLightbox(src, alt) {
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
-            <img src="${src}" alt="${alt}">
-            <p>${alt}</p>
-        </div>
-    `;
-
-    const style = document.createElement('style');
-    style.textContent = `
         .lightbox {
             position: fixed;
             top: 0;
@@ -421,25 +294,59 @@ function showLightbox(src, alt) {
         }
     `;
 
-    if (!document.querySelector('style[data-lightbox]')) {
-        style.setAttribute('data-lightbox', 'true');
-        document.head.appendChild(style);
-    }
+if (!document.querySelector('style[data-lightbox]')) {
+    style.setAttribute('data-lightbox', 'true');
+    document.head.appendChild(style);
+}
 
-    document.body.appendChild(lightbox);
+// ============================================
+// GALLERY LIGHTBOX FUNCTION
+// ============================================
 
-    // Close lightbox
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target.className === 'lightbox-close') {
-            document.body.removeChild(lightbox);
-        }
-    });
-
-    // Close on ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.parentNode) {
-            document.body.removeChild(lightbox);
-        }
+function initGalleryLightbox() {
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    
+    galleryItems.forEach(img => {
+        img.addEventListener('click', function() {
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            
+            const content = document.createElement('div');
+            content.className = 'lightbox-content';
+            
+            const imgClone = this.cloneNode();
+            const caption = this.parentElement.querySelector('.gallery-caption');
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.textContent = '×';
+            
+            content.appendChild(imgClone);
+            if (caption) {
+                const p = document.createElement('p');
+                p.textContent = caption.textContent;
+                content.appendChild(p);
+            }
+            content.appendChild(closeBtn);
+            
+            lightbox.appendChild(content);
+            document.body.appendChild(lightbox);
+            
+            // Close lightbox
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === closeBtn) {
+                    document.body.removeChild(lightbox);
+                }
+            });
+            
+            // Close on ESC key
+            document.addEventListener('keydown', function closeLightbox(e) {
+                if (e.key === 'Escape' && lightbox.parentNode) {
+                    document.body.removeChild(lightbox);
+                    document.removeEventListener('keydown', closeLightbox);
+                }
+            });
+        });
     });
 }
 
@@ -475,15 +382,12 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-
-    images.forEach(img => imageObserver.observe(img));
 }
 
 // ============================================
 // READY EVENT
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Website Masjid Halal siap digunakan!');
-    // All initialization is done above
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Website KB Al Halal siap digunakan!');
 });

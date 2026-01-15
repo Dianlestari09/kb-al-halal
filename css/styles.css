@@ -244,10 +244,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.7;
+    opacity: 0.9;
     z-index: 1;
 }
 
@@ -355,7 +355,17 @@ body {
 
 @media (max-width: 768px) {
     .cartoon-sticky {
-        display: none;
+        width: 120px;
+        right: -30px;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .cartoon-sticky {
+        width: 100px;
+        right: -20px;
+        opacity: 0.6;
     }
 }
 
@@ -556,18 +566,38 @@ body {
 }
 
 .hero h2:first-of-type {
-    font-size: 1.9rem;
-    font-weight: 800;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 700px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
+    margin-bottom: 0;
+    line-height: 1.3;
+    z-index: 4;
 }
 
 .hero h2:last-of-type {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 700px;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.3;
+    z-index: 4;
+}
     opacity: 0.95;
 }
 
@@ -590,6 +620,8 @@ body {
     transition: var(--transition);
     box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
     animation: pulse-glow 2s infinite;
+    display: inline-block;
+    margin-top: 20px;
 }
 
 .cta-button:hover {
@@ -636,13 +668,23 @@ body {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 40px;
     align-items: center;
+    margin-bottom: 40px;
+}
+
+.about-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
 }
 
 .about-text {
     animation: slide-in-left 0.8s ease-out;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .about-text p {
@@ -680,6 +722,9 @@ body {
 
 .about-image {
     animation: slide-in-right 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .about-image img {
@@ -694,6 +739,71 @@ body {
 .about-image img:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 35px rgba(255, 107, 157, 0.4);
+}
+
+/* Info Item Styles */
+.info-item {
+    background: rgba(107, 159, 184, 0.1);
+    border-left: 4px solid #A8D8D8;
+    padding: 20px;
+    border-radius: 8px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.info-item i {
+    color: #6B9FB8;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.schedule-content h4,
+.location-content h4 {
+    color: #6B9FB8;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(107, 159, 184, 0.2);
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.day-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.time-label {
+    color: #6B9FB8;
+    font-weight: 500;
+}
+
+.map-container {
+    position: relative;
+}
+
+.maps-link-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #A8D8D8;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
 }
 
 /* ============================================
@@ -742,8 +852,9 @@ body {
 
 .team-leader {
     grid-column: 1 / -1;
-    max-width: 400px;
-    margin: 0 auto 20px auto;
+    max-width: 350px;
+    margin: 0 auto 30px auto;
+    justify-self: center;
 }
 
 .team-card {
@@ -1253,25 +1364,33 @@ body {
 
 .facility-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-items: center;
 }
 
-/* First 3 items: 3 columns (2 cols each in 6-col grid) */
-.facility-card:nth-child(1),
-.facility-card:nth-child(2),
-.facility-card:nth-child(3) {
-    grid-column: span 2;
+.facility-grid .facility-card:nth-child(4),
+.facility-grid .facility-card:nth-child(5) {
+    grid-column: auto;
 }
 
-/* 4th and 5th items: centered in second row */
-.facility-card:nth-child(4) {
-    grid-column: 2 / span 2;
+.facility-grid .facility-card:nth-child(4) {
+    grid-column: 1 / 2;
+    margin-left: auto;
+    margin-right: 12.5px;
 }
 
-.facility-card:nth-child(5) {
-    grid-column: 4 / span 2;
+.facility-grid .facility-card:nth-child(5) {
+    grid-column: 2 / 3;
+    margin-left: 12.5px;
+    margin-right: auto;
 }
+
+/* ============================================
+   FACILITY CARDS
+   ============================================ */
 
 .facility-card {
     background: white;
@@ -1372,11 +1491,11 @@ body {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     position: relative;
     z-index: 1;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
     justify-items: center;
     width: 100%;
@@ -1394,7 +1513,7 @@ body {
     border: 5px solid var(--secondary-color);
     background: white;
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -1536,6 +1655,92 @@ body {
     margin: 0;
 }
 
+.location-item {
+    width: 100%;
+}
+
+.location-content {
+    width: 100%;
+}
+
+.map-container {
+    width: 100%;
+    margin: 15px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.map-container iframe {
+    display: block;
+}
+
+.maps-link-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: white;
+    background: linear-gradient(135deg, #6B9FB8 0%, #A8D8D8 100%);
+    padding: 8px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 12px rgba(107, 159, 184, 0.4);
+}
+
+.maps-link-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 159, 184, 0.5);
+    background: linear-gradient(135deg, #5a8da3 0%, #96c4c8 100%);
+}
+
+.schedule-content {
+    width: 100%;
+}
+
+.schedule-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.schedule-item {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(107, 159, 184, 0.1) 0%, rgba(168, 216, 216, 0.1) 100%);
+    padding: 12px 15px;
+    border-radius: 12px;
+    border-left: 4px solid #6B9FB8;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    background: linear-gradient(135deg, rgba(107, 159, 184, 0.2) 0%, rgba(168, 216, 216, 0.2) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(107, 159, 184, 0.15);
+}
+
+.day-label {
+    font-weight: 900;
+    color: #6B9FB8;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.time-label {
+    color: #666;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
 .contact-link {
     color: var(--primary-color);
     text-decoration: none;
@@ -1638,6 +1843,7 @@ body {
     position: relative;
     overflow: hidden;
     transition: var(--transition);
+    min-height: auto;
 }
 
 .info-card::before {
@@ -2158,6 +2364,10 @@ body {
         font-size: 2.5rem;
     }
 
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+
     .hero p {
         font-size: 1.2rem;
     }
@@ -2186,6 +2396,16 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .about-info-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .info-item {
+        min-height: auto;
+        padding: 30px 20px;
+    }
+
     .info-grid {
         grid-template-columns: 1fr;
     }
@@ -2202,9 +2422,23 @@ body {
 
     .team-grid,
     .activity-grid,
-    .program-grid,
-    .gallery-grid {
+    .program-grid {
         grid-template-columns: 1fr;
+    }
+
+    .facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .facility-grid .facility-card:nth-child(4),
+    .facility-grid .facility-card:nth-child(5) {
+        grid-column: auto;
+        margin: 0 !important;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
 
     .accreditation-content {
@@ -2226,32 +2460,732 @@ body {
     }
 
     .cta-button {
-        width: 100%;
         padding: 12px 30px;
         font-size: 1rem;
+        width: auto;
+        display: inline-block;
     }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
+    }
+
+    .hero h2 {
+        font-size: 0.7rem;
+        margin-bottom: 5px;
+    }
+
+    .hero h2:first-of-type {
+        font-size: 0.7rem;
     }
 
     .hero p {
-        font-size: 1rem;
+        font-size: 0.75rem;
     }
 
     h2 {
-        font-size: 1.8rem !important;
+        font-size: 1.3rem !important;
+    }
+
+    .about-info-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .info-item {
+        min-height: auto;
+        padding: 30px 20px;
+        font-size: 1rem;
+    }
+
+    .schedule-content h4,
+    .location-content h4 {
+        font-size: 1.3rem;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facility-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facility-grid .facility-card:nth-child(4),
+    .facility-grid .facility-card:nth-child(5) {
+        grid-column: auto;
+        margin: 0 !important;
     }
 
     .activity-card,
+    .facility-card,
     .team-card,
     .program-card {
         padding: 20px;
     }
 
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
     .contact {
         padding: 40px 0;
+    }
+}
+
+/* Mobile Responsive Improvements */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding: 60px 0 40px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2), 
+                     3px 3px 0 rgba(132, 94, 194, 0.3);
+    }
+
+    .hero h2 {
+        font-size: 0.85rem;
+    }
+
+    .hero h2:first-of-type {
+        font-size: 0.9rem;
+    }
+
+    .hero h2:last-of-type {
+        font-size: 0.75rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .cta-button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+
+    .about,
+    .team,
+    .prayer-schedule,
+    .vision-mission,
+    .programs,
+    .activities,
+    .facilities,
+    .gallery,
+    .accreditation,
+    .statistics,
+    .village,
+    .contact {
+        padding: 40px 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .gallery-item {
+        aspect-ratio: 1/1;
+    }
+
+    .gallery-overlay p {
+        font-size: 1rem;
+    }
+
+    .about-list li {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+
+    .info-item {
+        padding: 20px;
+    }
+
+    .info-item i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .info-item h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .info-item p {
+        font-size: 0.9rem;
+    }
+
+    .location-item {
+        grid-column: 1 / -1;
+    }
+
+    .map-container iframe {
+        height: 200px;
+    }
+
+    .team-card,
+    .activity-card,
+    .program-card,
+    .facility-card,
+    .prayer-card,
+    .info-card {
+        padding: 20px;
+    }
+
+    .team-card h3,
+    .activity-card h3,
+    .program-card h3,
+    .facility-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .team-card p,
+    .activity-card p,
+    .program-card p,
+    .facility-card p {
+        font-size: 0.9rem;
+    }
+
+    .prayer-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .activity-icon,
+    .program-icon,
+    .facility-icon {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+
+    .team-image {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 15px;
+    }
+
+    .team-image img {
+        border-width: 3px;
+    }
+
+    .team-position {
+        font-size: 0.95rem;
+    }
+
+    .vision-mission h3 {
+        font-size: 1.2rem;
+        gap: 10px;
+    }
+
+    .vision-mission h3 i {
+        font-size: 1.5rem;
+    }
+
+    .vision-text,
+    .mission-text {
+        font-size: 0.95rem;
+    }
+
+    .mission-list li {
+        font-size: 0.9rem;
+        padding-left: 25px;
+    }
+
+    .stat-card {
+        padding: 25px 20px;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 15px;
+    }
+
+    .footer-section h4 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-section p {
+        font-size: 0.9rem;
+    }
+
+    .social-links {
+        gap: 12px;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .accreditation-card {
+        padding: 30px 20px;
+    }
+
+    .accreditation-circle {
+        width: 110px;
+        height: 110px;
+    }
+
+    .accreditation-circle::before {
+        width: 120px;
+        height: 120px;
+    }
+
+    .accreditation-grade {
+        font-size: 3rem;
+    }
+
+    .accreditation-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .contact h2 {
+        font-size: 2rem;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+
+    .schedule-item {
+        padding: 10px 12px;
+    }
+
+    .day-label {
+        font-size: 0.85rem;
+    }
+
+    .time-label {
+        font-size: 0.75rem;
+    }
+
+    .maps-link-button {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .info-grid,
+    .team-grid,
+    .activity-grid,
+    .program-grid,
+    .facility-grid,
+    .accreditation-content,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h2 {
+        font-size: 2.2rem !important;
+    }
+
+    h3 {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .hero {
+        padding: 20px 0 12px;
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+        position: absolute;
+        top: 32% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
+    }
+
+    .hero h2 {
+        font-size: 0.55rem;
+        margin-bottom: 2px;
+    }
+
+    .hero h2:first-of-type {
+        font-size: 0.5rem;
+        top: 22%;
+    }
+
+    .hero h2:last-of-type {
+        font-size: 0.45rem;
+        top: 28%;
+    }
+
+    .hero p {
+        font-size: 0.6rem;
+        margin-bottom: 6px;
+    }
+
+    .cta-button {
+        padding: 5px 10px;
+        font-size: 0.55rem;
+        display: inline-block;
+        width: auto;
+    }
+
+    h2 {
+        font-size: 1.1rem !important;
+    }
+
+    h3 {
+        font-size: 1.05rem !important;
+    }
+
+    .about,
+    .team,
+    .prayer-schedule,
+    .vision-mission,
+    .programs,
+    .activities,
+    .facilities,
+    .gallery,
+    .accreditation,
+    .statistics {
+        padding: 30px 0;
+    }
+
+    .about-list li {
+        font-size: 0.9rem;
+        padding: 8px 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-item {
+        max-width: 100%;
+        aspect-ratio: 1/1;
+    }
+
+    .gallery-overlay p {
+        font-size: 0.75rem;
+        padding: 5px;
+        letter-spacing: 0.5px;
+    }
+
+    .team-card,
+    .activity-card,
+    .program-card,
+    .facility-card,
+    .prayer-card,
+    .info-card,
+    .stat-card {
+        padding: 15px;
+    }
+
+    .team-card h3,
+    .activity-card h3,
+    .program-card h3,
+    .facility-card h3,
+    .prayer-card h3 {
+        font-size: 1rem;
+    }
+
+    .team-card p,
+    .activity-card p,
+    .program-card p,
+    .facility-card p,
+    .prayer-desc {
+        font-size: 0.85rem;
+    }
+
+    .info-card p {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .info-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .activity-icon,
+    .program-icon,
+    .facility-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .team-image {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
+    }
+
+    .team-position {
+        font-size: 0.9rem;
+    }
+
+    .footer-content {
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .footer-section h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .footer-section p {
+        font-size: 0.85rem;
+    }
+
+    .footer-section ul li a {
+        font-size: 0.9rem;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+
+    .map-container {
+        margin: 10px 0;
+    }
+
+    .map-container iframe {
+        height: 180px;
+    }
+
+    .maps-link-button {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .schedule-item {
+        padding: 8px;
+    }
+
+    .day-label {
+        font-size: 0.75rem;
+    }
+
+    .time-label {
+        font-size: 0.65rem;
+    }
+
+    .accreditation-badge {
+        top: 10px;
+        right: 10px;
+    }
+
+    .badge-content {
+        width: 65px;
+        height: 65px;
+    }
+
+    .badge-grade {
+        font-size: 1.5rem;
+    }
+
+    .badge-title {
+        font-size: 0.5rem;
+    }
+
+    .accreditation-card {
+        padding: 20px 15px;
+    }
+
+    .accreditation-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .accreditation-circle::before {
+        width: 110px;
+        height: 110px;
+    }
+
+    .accreditation-grade {
+        font-size: 2.5rem;
+    }
+
+    .accreditation-card h3 {
+        font-size: 1.05rem;
+    }
+
+    .stat-card {
+        padding: 20px 15px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        margin-bottom: 6px;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .contact {
+        padding: 30px 0;
+    }
+
+    .contact h2 {
+        font-size: 1.7rem;
+        margin-bottom: 30px;
+    }
+
+    .info-item i {
+        font-size: 1.8rem;
+    }
+
+    .info-item h4 {
+        font-size: 1rem;
+    }
+
+    .info-item p {
+        font-size: 0.85rem;
+    }
+
+    .prayer-card {
+        padding: 18px;
+    }
+
+    .prayer-time {
+        font-size: 0.95rem;
+    }
+
+    .vision-box,
+    .mission-box {
+        padding: 20px;
+    }
+
+    .vision-mission h3 {
+        font-size: 1.1rem;
+        gap: 8px;
+    }
+
+    .vision-mission h3 i {
+        font-size: 1.3rem;
+    }
+
+    .vision-text,
+    .mission-text {
+        font-size: 0.9rem;
+    }
+
+    .mission-list li {
+        font-size: 0.85rem;
+        padding-left: 20px;
+    }
+
+    .mission-list li::before {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .hero h2 {
+        font-size: 0.7rem;
+        line-height: 1.2;
+    }
+
+    .hero h2:first-of-type {
+        font-size: 0.72rem;
+    }
+
+    .hero h2:last-of-type {
+        font-size: 0.65rem;
+    }
+
+    .hero p {
+        font-size: 0.75rem;
+    }
+
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    h2 {
+        font-size: 1.6rem !important;
+    }
+
+    .about,
+    .team,
+    .contact {
+        padding: 25px 0;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .team-card,
+    .activity-card,
+    .program-card,
+    .facility-card {
+        padding: 12px;
+    }
+
+    .footer-content {
+        padding: 0 10px;
+        gap: 15px;
+    }
+
+    .footer-section h4 {
+        font-size: 0.95rem;
+    }
+
+    .social-links a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
     }
 }
