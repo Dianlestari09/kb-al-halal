@@ -2388,6 +2388,18 @@ body {
         font-size: 1.2rem;
     }
 
+    .activities h2,
+    .facilities h2,
+    .gallery h2 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+
+    .activities::before,
+    .facilities::before {
+        font-size: 2rem;
+    }
+
     .accreditation-badge {
         top: 15px;
         right: 15px;
@@ -2881,6 +2893,19 @@ body {
 
     h3 {
         font-size: 1.05rem !important;
+    }
+
+    .activities h2,
+    .facilities h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 0 #845EC2;
+    }
+
+    .activities::before,
+    .facilities::before {
+        font-size: 1.5rem;
+        top: 10px;
     }
 
     .about,
